@@ -1,0 +1,683 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: #050516;
+    color: white;
+}
+#sky {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: 
+         radial-gradient(
+            circle at 85% 18%,
+            rgba(245, 243, 206, 0.07),
+            transparent 22%
+         ),
+         radial-gradient(
+            circle at 50% 45%,
+            rgba(75, 90, 155, 0.08),
+            transparent 50%
+         ),
+         linear-gradient(
+            to bottom,
+            #02020d 0%,
+            #050516 45%,
+            #080820 100%
+         );
+}
+.star-field {
+    position: absolute;
+    inset: 0;
+}
+/* Soft Milky Way Glow */
+.star-field::before {
+    content: "";
+    position: absolute;
+    width: 140%;
+    height: 55%;
+    top: 25%;
+    left: -20%;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(100, 115, 190, 0.10) 0%,
+            rgba(80, 90, 160, 0.06) 35%,
+            transparent 72%
+        );
+    transform: rotate(-18deg);
+    filter: blur(28px);
+    pointer-events: none;
+}
+.star-field::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+.intro {
+    font-family: Georgia, serif;
+    font-size: clamp(18px, 4vw, 24px);
+    color: rgba(255, 255, 255, 0.5);
+}
+.star {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%; 
+    position: absolute;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    top: 30%;
+    left: 40%;
+    
+box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.85),
+    0 0 12px rgba(255, 255, 255, 0.55),
+    0 0 22px rgba(180, 200, 255, 0.25);
+    animation: twinkle 3.5s ease-in-out infinite;
+    z-index: 2;
+}
+@keyframes twinkle {
+    0% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+.star-1 {
+    top: 25%;
+    left: 25%;
+}
+.star-2 {
+    top: 20%;
+    left: 50%;
+}
+
+.star-3 {
+    top: 35%;
+    left: 70%;
+    animation-delay: 0.8s;
+}
+.star-4 {
+    top: 55%;
+    left: 60%;
+    animation-delay: 1.4s;
+}
+.star-5 {
+    top: 70%;
+    left:40%;
+    animation-delay: 0.4s;
+}
+.star-6 {
+    top: 55%;
+    left: 20%;
+    animation-delay: 1.5s;
+}
+.random-star {
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0.4;
+    animation: starTwinkle 4s ease-in-out infinite;
+}
+@keyframes starTwinkle {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+.moon {
+    width: 90px;
+    height: 90px;
+    background: #f5f3c3;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    top: 12%;
+    right: 12%;
+    box-shadow: 
+     0 0 15px rgba(245, 243, 206, 0.5),
+     0 0 35px rgba(245, 243, 206, 0.25),
+     0 0 70px rgba(245, 243, 206, 0.12);
+}
+.moon:hover {
+    transform: scale(1.05);
+}
+.moon:active {
+    transform: scale(0.96);
+}
+.moon.waning-crescent {
+    background: #f5f3ce;
+    box-shadow:
+    0 0 12px rgba(245, 243, 206, 0.6),
+    0 0 30px rgba(245, 243, 206, 0.3),
+    0 0 60px rgba(245, 243, 206, 0.15),
+    0 0 100px rgba(245, 243, 206, 0.08);
+    overflow: hidden;
+}
+.moon::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: rgba(160, 158, 130, 0.18);
+    border-radius: 50%;
+    top: 18px;
+    left: 20px;
+}
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(160, 158, 130, 0.18);
+    border-radius: 50%;
+    top: 52px;
+    left: 48px;
+}
+.moon-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    max-width: 500px;
+    padding: 30px;
+    background: rgba(10, 10, 35, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    transform: translate(-50%, -45%);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+}
+.moon-message p {
+    margin: 0;
+    font-family: Georgia, Serif;
+    font-size: 20px;
+    color: white;
+    transition: opacity 0.25s ease;
+}
+.birthday-message {
+    display: none;
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80%;
+    z-index: 5;
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.birthday-message h1 {
+    font-family: Georgia, Serif;
+    font-size: clamp(28px, 5vw, 36px);
+    margin-bottom: 10px;
+}
+.birthday-message p {
+    font-family: Georgia, serif ;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    background: transparent;
+    margin: 0 auto 20px;
+    max-width: 500px;
+}
+#continue-btn {
+    cursor: pointer;
+    padding: 12px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-family: Georgia, Serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition:
+       transform 0.3s ease,
+       box-shadow 0.3s ease,
+       background 0.3s ease;
+}
+#continue-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 0 20px rgba(180, 200, 255, 0.25);
+}
+#continue-btn:focus-visible,
+#open-letter-btn:focus-visible {
+    outline: 2px solid rgba(245, 243, 206, 0.8);
+    outline-offset: 4px;
+}
+#next-section {
+    display: none;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: 60px 20px; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at 85% 18%,
+            rgba(245, 243, 206, 0.07),
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(75, 90, 155, 0.08),
+            transparent 50%
+        ),
+        linear-gradient(
+            to bottom,
+            #02020d 0%,
+            #050516 45%,
+            #080820 100%
+        );
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    overflow-y: auto;
+}
+#next-section > h2 {
+    font-family: Georgia, Serif;
+    font-size: 32px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-shadow:
+    0 0 18px rgba(180, 200, 255, 0.2),
+    0 0 35px rgba(180, 200, 255, 0.12);
+}
+#next-section > p {
+    max-width: 420px;
+    margin: 0 auto 25px;
+    padding: 0 10px;
+    font-family: Georgia, Serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7)
+}
+#letter-section > h2 {
+    font-family: Georgia, Serif;
+    font-size: 25px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 14px rgba(180, 200, 255, 0.18);
+}
+#letter-content {   
+    display: none;
+    opacity: 0;
+    position: relative;
+    left: 50%;
+    width: min(90%, 600px);
+    max-width: 600px;
+    margin: 40px 0 0;
+    padding: 25px;
+background: rgba(255, 255, 255, 0.045);
+border: 1px solid rgba(255, 255, 255, 0.16);
+box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 25px rgba(180, 200, 255, 0.08);
+    border-radius: 18px;
+    transform: translate(-50%, 15px);
+    transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+    padding: clamp(18px, 5vw, 30px);
+    backdrop-filter: blur(8px);
+}
+#letter-content:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(180, 200, 255, 0.13);
+}
+#letter-content p {
+    font-family: Georgia, Serif;
+    font-size: 16px;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.82);
+    text-align: center;
+    margin: 0;
+}
+#open-letter-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-family: Georgia, Serif;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    margin: 15px auto 0;
+}
+#open-letter-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 0 18px rgba(180, 200, 255, 0.2);
+}
+#open-letter-btn:active {
+    transform: scale(0.97);
+}   
+#open-letter-btn,
+#continue-btn {
+    -webkit-tap-highlight-color: transparent;
+}
+#open-letter-btn:active,
+#continue-btn:active {
+    transform: scale(0.97);
+}
+#secret-star {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+#secret-star > p {
+    font-family: Georgia, Serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 12px;
+}
+#secret-star span {
+    display: inline-block;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;    
+    padding: 10px;
+    touch-action: manipulation;    
+    text-shadow:
+        0 0 6px rgba(255, 255, 255, 0.9),
+        0 0 15px rgba(180, 200, 255, 0.7),
+        0 0 30px rgba(180, 200, 255, 0.35);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    animation: secretTwinkle 3s ease-in-out infinite;
+}
+@keyframes secretTwinkle {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+#secret-star span:hover {
+    transform: scale(1.15);
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 20px rgba(180, 200, 255, 0.9),
+        0 0 40px rgba(180, 200, 255, 0.5);
+}
+#secret-star span:active {
+    transform: scale(0.9);
+}
+#secret-message {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}   
+#secret-message > p {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 12px rgba(180, 200, 255, 0.35);
+    margin: 15px 0;
+}
+#final-message {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#final-message h1 {
+    font-family: Georgia, Serif;
+    font-size: clamp(30px, 5vw, 42px);
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    margin: 15px 0;
+    color: #fff9df;
+    text-shadow:
+        0 0 10px rgba(255, 249, 223, 0.65),
+        0 0 25px rgba(180, 200, 255, 0.3);
+}
+#final-message p {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.moon.new-moon {
+    background: #050516;
+    box-shadow: none;
+}
+.moon.waxing-crescent {
+    background: #f5f3ce;
+    overflow: hidden;
+}
+.moon.waxing-crescent::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    left: -25px;
+}
+.moon.waning-crescent::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    right: -25px;
+}
+.moon.first-quarter {
+    background: #f5f3ce;
+    overflow: hidden;
+}
+.moon.first-quarter::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    left: -45px;
+}
+.moon.waxing-gibbous {
+    background: #f5f3ce;
+    overflow: hidden;
+}
+.moon.waxing-gibbous::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    right: 25px;
+}
+.moon.full-moon {
+    background: #f5f3ce;
+    box-shadow:
+        0 0 15px rgba(245, 243, 206, 0.7),
+        0 0 35px rgba(245, 243, 206, 0.4),
+        0 0 70px rgba(245, 243, 206, 0.2),
+        0 0 110px rgba(245, 243, 206, 0.1);
+}
+.moon.waning-gibbous {
+    background: #f5f3ce;
+    overflow: hidden;
+}
+.moon.waning-gibbous::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    left: 15px
+}
+.moon.last-quarter {
+    background: #f5f3ce;
+    overflow: hidden;
+}
+.moon.last-quarter::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #050516;
+    top: 0;
+    right: -45px;
+}
+#close-next-btn {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+#close-next-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile Responsive Layout */
+@media (max-width: 600px) {
+    .moon {
+        top: 8%;
+        right: 8%;
+    }
+    .star {
+        min-width: 8px;
+        min-height: 8px;
+    }
+    .moon-message {
+        width: 88%;
+        padding: 20px;
+    }
+    .moon-message p {
+        font-size: 17px;
+    }
+    .birthday-message {
+        width: 90%;
+        bottom: 7%;
+    }
+    .birthday-message p {
+        font-size: 16px;
+    }
+    #next-section {
+        padding: 70px 16px 35px;
+    }
+    #next-section > h2 {
+        font-size: 28px;
+    }
+    #letter-content {
+        width: 100%;
+        margin-top: 28px;
+    }
+    #close-next-btn {
+        top: 15px;
+        right: 15px;
+    }
+}
+.moon.new-moon::before,
+.moon.new-moon::after {
+    display: none;
+}
+/* Interactive Star Effects */
+.star {
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+.star:hover,
+.star:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 20px rgba(180, 200, 255, 0.9),
+        0 0 35px rgba(180, 200, 255, 0.5);
+}
+.star:focus-visible {
+    outline: 2px solid rgba(245, 243, 206, 0.8);
+    outline-offset: 6px;
+}
+/* Constellation Star Sizes */
+.star-1 {
+    width: 10px;
+    height: 10px;
+}
+.star-2 {
+    width: 7px;
+    height: 7px;
+}
+.star-3 {
+    width: 11px;
+    height: 11px;
+}
+.star-4 {
+    width: 8px;
+    height: 8px;
+}
+.star-5 {
+    width: 10px;
+    height: 10px;
+}
+.star-6 {
+    width: 7px;
+    height: 7px;
+}
+/* Larger Invisible Tap Area */
+.star::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    background: transparent;
+}
