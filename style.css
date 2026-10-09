@@ -681,3 +681,97 @@ box-shadow:
     border-radius: 50%;
     background: transparent;
 }
+/* Secret Lock Screen */
+#lock-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(75, 90, 155, 0.18),
+            transparent 55%
+        ),
+        linear-gradient(
+            to bottom,
+            #02020d,
+            #050516 55%,
+            #080820
+        );
+}
+.lock-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 35px 25px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: 0 0 40px rgba(100, 115, 190, 0.1);
+    backdrop-filter: blur(10px);
+}
+.lock-icon {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+.lock-card h1 {
+    font-family: Georgia, serif;
+    font-size: 29px;
+    font-weight: normal;
+    color: #fff9df;
+    margin: 0 0 12px;
+}
+.lock-card > p {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: Georgia, serif;
+    margin-bottom: 25px;
+}
+#unlock-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+#secret-code {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 6px;
+}
+#secret-code::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+#secret-code:focus {
+    border-color: rgba(245, 243, 206, 0.7);
+}
+#unlock-form button {
+    padding: 13px;
+    border: 1px solid rgba(245, 243, 206, 0.3);
+    border-radius: 25px;
+    background: rgba(245, 243, 206, 0.1);
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+#unlock-form button:hover {
+    background: rgba(245, 243, 206, 0.2);
+}
+#lock-error {
+    min-height: 18px;
+    margin: 0;
+    color: #ffb8c0;
+    font-size: 13px;
+}

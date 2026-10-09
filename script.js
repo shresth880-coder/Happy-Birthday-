@@ -223,4 +223,22 @@ secretStarIcon.addEventListener("keydown", function (event) {
         event.preventDefault();
         secretStarIcon.click();
     }
+}); 
+const unlockForm = document.querySelector("#unlock-form");
+const secretCodeInput = document.querySelector("#secret-code");
+const lockScreen = document.querySelector("#lock-screen");
+const lockError = document.querySelector("#lock-error");
+unlockForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (secretCodeInput.value === "2511") {
+        lockScreen.style.opacity = "0";
+        lockScreen.style.transition = "opacity 0.6s ease";
+        setTimeout(() => {
+            lockScreen.style.display = "none";
+        }, 600);
+    } else {
+        lockError.textContent = "That isn't the right code. Try again ✨";
+        secretCodeInput.value = "";
+        secretCodeInput.focus();
+    }
 });

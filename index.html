@@ -5,7 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
     </head>
-<body>
+<body>  
+<div id="lock-screen">
+    <div class="lock-card">
+        <div class="lock-icon">🔐</div>
+        <h1>A Little Universe</h1>
+        <p>A little secret awaits you...</p>
+        <form id="unlock-form">
+            <input
+                type="password"
+                id="secret-code"
+                placeholder="Enter secret code"
+                inputmode="numeric"
+                maxlength="4"
+                autocomplete="off"
+                required
+            >
+            <button type="submit">Unlock ✨</button>
+            <p id="lock-error" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
     <section id="sky">
          <div class="star-field"></div>
         <div class="intro">
