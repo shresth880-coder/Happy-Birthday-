@@ -147,6 +147,8 @@ closeNextBtn.addEventListener("click", function () {
         secretMessage.style.opacity = "0";
         secretMessage.style.transform = "translateY(15px)";
         finalMessage.style.display = "none";
+        anotherSurprise.hidden = true;
+anotherSurprise.style.opacity = "0";
         finalMessage.style.opacity = "0";
         finalMessage.style.transform = "translateY(15px) scale(0.95)";
     }, 800);
@@ -206,11 +208,23 @@ finalMessage.style.transform = "translateY(15px) scale(0.95)";
     }, 50);
 });
 const finalMessage = document.querySelector("#final-message");
+const anotherSurprise = document.querySelector("#another-surprise");
 const secretStarIcon = document.querySelector("#secret-star span");
 const secretMessage = document.querySelector("#secret-message");
 secretStarIcon.addEventListener("click", function () {
+    if (!anotherSurprise.hidden) return;
     secretMessage.style.display = "block";
     finalMessage.style.display = "block";
+    setTimeout(() => {
+    anotherSurprise.hidden = false;
+    anotherSurprise.style.opacity = "0";
+    anotherSurprise.style.transform = "translateY(20px)";
+
+    requestAnimationFrame(() => {
+        anotherSurprise.style.opacity = "1";
+        anotherSurprise.style.transform = "translateY(0)";
+    });
+}, 1000);
     setTimeout(() => {
         secretMessage.style.opacity = "1";
         secretMessage.style.transform = "translateY(0)";
